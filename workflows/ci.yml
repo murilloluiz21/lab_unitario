@@ -2,7 +2,7 @@ name: Node CI
 
 on:
   push:
-    branches: [ main, master, feature-* ]
+    branches: [ main, master, feature-lab-final ]
   pull_request:
     branches: [ main, master, feature-lab-final ]
 

@@ -1,6 +1,10 @@
 name: Continuos integration
 
-on: pull_request
+on:
+  push:
+    branches: [ main, master, feature-lab-final ]
+  pull_request:
+    branches: [ main, master, feature-lab-final ]
 
 jobs: 
   continuos-integration:
