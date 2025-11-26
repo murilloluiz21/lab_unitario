@@ -1,6 +1,10 @@
 name: Continuos integration
 
-on: pull_request
+on:
+  push:
+    branches: [ main, master, feature-lab-final ]
+  pull_request:
+    branches: [ main, master, feature-lab-final ]
 
 jobs: 
   continuos-integration:
@@ -17,3 +21,7 @@ jobs:
           npm install
           npm run build
           npm run test
+          npm run bash
+
+#adicionando um texto para realizar um pull request
+#git actions

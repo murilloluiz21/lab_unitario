@@ -35,3 +35,10 @@ def protected():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1313)
+
+def somar(a, b):
+    return a + b
+
+def carregar_mensagem():
+    return "Hello, Lab!"
+
