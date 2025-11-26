@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main, master, feature-* ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, feature-lab-final ]
 
 jobs:
   build:
@@ -25,7 +25,4 @@ jobs:
       - name: Run tests
         run: npm test
 
-on:
-  push:
-    branches: [ main, master, feature-lab-final ]
 
