@@ -28,3 +28,13 @@ class APITestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+from app import somar, carregar_mensagem
+
+def test_somar():
+    assert somar(2, 3) == 5
+    assert somar(-1, 1) == 0
+
+def test_carregar_mensagem():
+    assert carregar_mensagem() == "Hello, Lab!"
+
