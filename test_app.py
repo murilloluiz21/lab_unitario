@@ -1,35 +1,26 @@
-import unittest
-from app import app
-import werkzeug
+import pytest
+from app import app, somar, carregar_mensagem
 
-# Patch temporário para adicionar o atributo '__version__' em werkzeug 
-if not hasattr(werkzeug, '__version__'): 
-    werkzeug.__version__ = "mock-version"
+@pytest.fixture
+def client():
+    """Cria um cliente de teste para a API Flask"""
+    app.config['TESTING'] = True
+    with app.test_client() as client:
+        yield client
 
-class APITestCase(unittest.TestCase): 
-    @classmethod 
-    def setUpClass(cls): 
-        # Criação do cliente de teste 
-        cls.client = app.test_client()
-    
-    def test_home(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json, {"message": "API is running"})
+def test_home(client):
+    response = client.get('/')
+    assert response.status_code == 200
+    assert response.json == {"message": "API is running"}
 
-    def test_login(self):
-        response = self.client.post('/login')
-        self.assertEqual(response.status_code, 200)
-        self.assertIn('access_token', response.json)
+def test_login(client):
+    response = client.post('/login')
+    assert response.status_code == 200
+    assert 'access_token' in response.json
 
-    def test_protected_no_token(self):
-        response = self.client.get('/protected')
-        self.assertEqual(response.status_code, 401)
-
-if __name__ == '__main__':
-    unittest.main()
-
-from app import somar, carregar_mensagem
+def test_protected_no_token(client):
+    response = client.get('/protected')
+    assert response.status_code == 401
 
 def test_somar():
     assert somar(2, 3) == 5
